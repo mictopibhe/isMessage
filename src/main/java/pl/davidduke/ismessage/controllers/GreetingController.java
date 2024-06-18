@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.davidduke.ismessage.entity.Message;
 import pl.davidduke.ismessage.repository.MessageRepository;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class GreetingController {
@@ -39,6 +41,19 @@ public class GreetingController {
         Iterable<Message> messages = messageRepository.findAll();
         model.put("messages", messages);
 
+        return "main";
+    }
+
+    @PostMapping("/filter")
+    public String filter (@RequestParam String filter, Map<String, Object> model) {
+        Iterable<Message> messages;
+        if (Objects.nonNull(filter) && !filter.isEmpty()) {
+            messages = messageRepository.findByTag(filter);
+        } else {
+            messages = messageRepository.findAll();
+        }
+
+        model.put("messages", messages);
         return "main";
     }
 }
