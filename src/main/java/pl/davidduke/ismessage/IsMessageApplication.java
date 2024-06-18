@@ -1,4 +1,4 @@
-package pl.davidduke.isMessage;
+package pl.davidduke.ismessage;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
