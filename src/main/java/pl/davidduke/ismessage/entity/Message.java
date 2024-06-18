@@ -14,6 +14,11 @@ public class Message {
     private String text;
     private String tag;
 
+    public Message(String text, String tag) {
+        this.text = text;
+        this.tag = tag;
+    }
+
     public long getId() {
         return id;
     }
