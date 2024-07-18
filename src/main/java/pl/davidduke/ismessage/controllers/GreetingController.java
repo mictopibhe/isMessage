@@ -12,11 +12,11 @@ import pl.davidduke.ismessage.repository.MessageRepository;
 @Controller
 public class GreetingController {
     @Autowired
-    private MessageRepository messageRepository;
+    private MessageRepository msgRepository;
 
     @GetMapping("/")
     public String main(Model model) {
-        model.addAttribute("messages", messageRepository.findAll());
+        model.addAttribute("messages", msgRepository.findAll());
         return "main";
     }
 
@@ -31,9 +31,9 @@ public class GreetingController {
         }
 
         Message message = new Message(text, tag);
-        messageRepository.save(message);
+        msgRepository.save(message);
 
-        Iterable<Message> messages = messageRepository.findAll();
+        Iterable<Message> messages = msgRepository.findAll();
         model.addAttribute("messages", messages);
 
         return "main";

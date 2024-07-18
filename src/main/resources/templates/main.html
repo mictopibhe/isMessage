@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>The messages list</title>
+    <title>Messages list</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
     <form th:action="@{/main}" method="post">
         <input type="text" id="message" name="text" placeholder="Enter message">
         <input type="text" id="tag" name="tag" placeholder="Enter tag">
-        <input type="submit" value="Add">
+        <input type="submit" value="Enter">
 
         <div th:if="${error}" th:text="${error}" style="color:red;"></div>
     </form>
