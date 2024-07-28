@@ -1,23 +1,34 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>The messages list</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Messages list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-    <form th:action="@{/main}" method="post">
-        <input type="text" id="message" name="text" placeholder="Enter message">
-        <input type="text" id="tag" name="tag" placeholder="Enter tag">
-        <input type="submit" value="Add">
-
-        <div th:if="${error}" th:text="${error}" style="color:red;"></div>
+<div>
+    <form th:action="@{/logout}" th:method="POST">
+        <input type="submit" value="Sign Out">
     </form>
-    <ul>
-        <li th:each="message : ${messages}">
-            <span th:text="${message.getId()}"></span>
-            <span th:text="${message.getText()}"></span>
-            <span th:text="${message.getTag()}"></span>
-        </li>
-    </ul>
+</div>
+<form th:method="POST" th:action="@{/}" th:object="${message}">
+    <input type="text" th:field="*{text}" id="text" placeholder="Enter message">
+    <input type="text" th:field="*{tag}" id="tag" placeholder="Enter tag">
+    <input type="submit" value="Enter">
+
+    <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}" style="color:red">error</div>
+    <div th:if="${#fields.hasErrors('tag')}" th:errors="*{tag}" style="color:red">error</div>
+</form>
+<form th:method="POST" th:action="@{filter}">
+    <input type="text" name="filter">
+    <button type="submit">Search</button>
+</form>
+<div>Messages list:</div>
+<ul>
+    <li th:each="message : ${messages}">
+        <span th:text="${message.getId()}"></span>
+        <span th:text="${message.getText()}"></span>
+        <span th:text="${message.getTag()}"></span>
+    </li>
+</ul>
 </body>
 </html>
