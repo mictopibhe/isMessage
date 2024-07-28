@@ -18,15 +18,12 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(recuests -> recuests
-//                        .requestMatchers("/", "/home").permitAll()
-                        .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests(recuests -> recuests.anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
                 )
-                .logout(logout -> logout.permitAll())
+                .logout(LogoutConfigurer::permitAll)
                 .build();
     }
 
