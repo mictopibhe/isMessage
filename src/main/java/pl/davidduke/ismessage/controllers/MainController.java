@@ -11,7 +11,7 @@ import pl.davidduke.ismessage.repository.MessageRepository;
 
 @Controller
 @RequestMapping("/")
-public class GreetingController {
+public class MainController {
     @Autowired
     private MessageRepository msgRepository;
 
