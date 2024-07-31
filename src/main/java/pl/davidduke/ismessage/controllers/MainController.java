@@ -2,11 +2,13 @@ package pl.davidduke.ismessage.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.davidduke.ismessage.entity.Message;
+import pl.davidduke.ismessage.entity.User;
 import pl.davidduke.ismessage.repository.MessageRepository;
 
 @Controller
@@ -23,11 +25,15 @@ public class MainController {
     }
 
     @PostMapping
-    public String addMessage(@ModelAttribute("message") @Valid Message message, BindingResult bindingResult, Model model) {
+    public String addMessage(
+            @ModelAttribute("message") @Valid Message message, BindingResult bindingResult,
+            Model model, @AuthenticationPrincipal User user
+    ) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("messages", msgRepository.findAll());
             return "main";
         }
+        message.setAuthor(user);
         msgRepository.save(message);
         return "redirect:/";
     }
